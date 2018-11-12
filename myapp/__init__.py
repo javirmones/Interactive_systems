@@ -2,7 +2,9 @@
 # -*- coding:utf-8; tab-width:4; mode:python -*-
 
 from flask import Flask, make_response, jsonify
+
 from myapp.oils_routes import bp_oils
+from myapp.users_routes import bp_users
 
 
 # Por defecto el root es $PREFIX/var/myapp-instance
@@ -10,6 +12,7 @@ app=Flask(__name__, instance_relative_config=False)
 app.config.from_pyfile('../instance/development.cfg')
 
 app.register_blueprint(bp_oils)
+app.register_blueprint(bp_users)
 
 
 # Este podría ir en otro Blueprint

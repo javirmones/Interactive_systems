@@ -15,74 +15,79 @@ def getOils():
     return make_response(jsonify({"oils":oils}), 200)
 
 def delOil(id_oil):
-    aux = list(filter(lambda t:t['name'] == id_oil, oils))
+    aux = list(filter(lambda t:t['nombre'] == id_oil, oils))
     if len(aux) == 0:
         abort(404)
     oils.remove(aux[0])
-    return make_response(jsonify({'deleted':aux[0]['name']}), 200)
+    return make_response(jsonify({'deleted':aux[0]['nombre']}), 200)
 
-def getOil(id_ps):    
-    aux = list(filter(lambda t:t['name'] == str(id_ps), oils))
+def getOil(id_oil):    
+    aux = list(filter(lambda t:t['id_oil'] == str(id_oil), oils))
     if len(aux) == 0:
         abort(404)
     return make_response(jsonify(aux[0]), 200)
 
-def addOil(id_ps):
-    aux = list(filter(lambda t:t['name'] == id_ps, oils))
+def addOil(id_oil):
+    aux = list(filter(lambda t:t['nombre'] == id_oil, oils))
 
-    nombreLatino = ""
-    descripcion = ""
-    familia = ""
-    procedencia = ""
-    extraccion = ""
-    descripcionOlf = ""
-    apariencia = ""
-    notaDePerf = ""
-    perfume = ""
-    solubilidad = ""
-    usos = ""
-    propiedades = ""
+    nombre              = ""
+    nombreLatino        = ""
+    descripcion         = ""
+    familia             = ""
+    procedencia         = ""
+    extraccion          = ""
+    descripcionOlf      = ""
+    apariencia          = ""
+    notaDePerf          = ""
+    perfume             = ""
+    solubilidad         = ""
+    usos                = ""
+    propiedades         = ""
 
     if request.json and 'descripcion' in request.json:
-        nombreLatino = request.json['nombreLatino']
-        descripcion = request.json['descripcion']
-        familia = request.json['familia']
-        procedencia = request.json['procedencia']
-        extraccion = request.json['extraccion']
-        descripcionOlf = request.json['descripcionOlf']
-        apariencia = request.json['apariencia']
-        notaDePerf = request.json['notaDePerf']
-        perfume = request.json['perfume']
-        solubilidad = request.json['solubilidad']
-        usos = request.json['usos']
-        propiedades = request.json['propiedades']
+        nombre              = request.json['nombre']
+        nombreLatino        = request.json['nombreLatino']
+        descripcion         = request.json['descripcion']
+        familia             = request.json['familia']
+        procedencia         = request.json['procedencia']
+        extraccion          = request.json['extraccion']
+        descripcionOlf      = request.json['descripcionOlf']
+        apariencia          = request.json['apariencia']
+        notaDePerf          = request.json['notaDePerf']
+        perfume             = request.json['perfume']
+        solubilidad         = request.json['solubilidad']
+        usos                = request.json['usos']
+        propiedades         = request.json['propiedades']
 
     if len(aux) != 0:
-        aux[0]['descripcion'] = descripcion
-        return make_response(jsonify({"updated":str(id_ps)}), 200)
+        aux[0]['nombre'] = nombre
+        return make_response(jsonify({"updated":str(nombre)}), 200)
         
-    new_ps = {"nombre" : str(id_ps),
-                "nombreLatino" : str(nombreLatino),
-                "familia" : str(familia),
-                "procedencia" : str(procedencia),
-                "extraccion" : str(extraccion),
-                "descripcionOlf" : str(descripcionOlf),
-                "apariencia" : str(apariencia),
-                "notaDePerf" : str(notaDePerf),
-                "perfume" : str(perfume),
-                "solubilidad" : str(solubilidad),
-                "usos" : str(usos),
-                "descripcion" : str(descripcion),
-                "propiedades" : str(propiedades)
+    new_id = int(oils[-1]['id_oil']+1)
+
+    new_ps = {"id_oil"              : str(new_id),
+                "nombre"            : str(id_oil),
+                "nombreLatino"      : str(nombreLatino),
+                "familia"           : str(familia),
+                "procedencia"       : str(procedencia),
+                "extraccion"        : str(extraccion),
+                "descripcionOlf"    : str(descripcionOlf),
+                "apariencia"        : str(apariencia),
+                "notaDePerf"        : str(notaDePerf),
+                "perfume"           : str(perfume),
+                "solubilidad"       : str(solubilidad),
+                "usos"              : str(usos),
+                "descripcion"       : str(descripcion),
+                "propiedades"       : str(propiedades)
         }
     oils.append(new_ps)
-    return make_response(jsonify({"id":str(id_ps)}), 201)
+    return make_response(jsonify({"id_oil":str(id_oil)}), 200)
 
-@bp_oils.route('/oils/<path:id_ps>', methods = ['DELETE', 'PUT', 'GET'])
-def manager_playlist(id_ps):
+@bp_oils.route('/oils/<path:id_oil>', methods = ['DELETE', 'PUT', 'GET'])
+def manager_oils(id_oil):
     if request.method == 'GET':
-        return getOil(id_ps)
+        return getOil(id_oil)
     elif request.method == 'PUT':
-        return addOil(id_ps)
+        return addOil(id_oil)
     elif request.method == 'DELETE':
-        return delOil(id_ps)
+        return delOil(id_oil)
