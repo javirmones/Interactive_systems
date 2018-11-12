@@ -10,9 +10,9 @@ from myapp.models import users
 bp_users = Blueprint("bp_users", __name__)
 
 # OPERACIONES sobre users
-@bp_users.route('/users', methods = ['GET'])
+@bp_users.route('/users/', methods = ['GET'])
 def getUsers():
-    return make_response(jsonify({"users":users}), 200)
+    return make_response(jsonify({'users':users}), 200)
 
 def delUser(id_user):
     aux = list(filter(lambda t:t['name'] == id_user, users))

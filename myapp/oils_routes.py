@@ -10,7 +10,7 @@ from myapp.models import oils
 bp_oils=Blueprint("bp_oils", __name__)
 
 # OPERACIONES sobre oils
-@bp_oils.route('/oils', methods = ['GET'])
+@bp_oils.route('/oils/', methods = ['GET'])
 def getOils():
     return make_response(jsonify({"oils":oils}), 200)
 

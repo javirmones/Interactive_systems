@@ -1,6 +1,6 @@
 function UsuariosViewModel() {
     var self = this;
-    self.usuariosURI = 'http://localhost:5000/v1/usuarios/';
+    self.usuariosURI = 'http://127.0.0.1:5000/users/';
     self.usuarios = ko.observableArray();
 
     self.miAjax = function (uri, method, data) {
@@ -59,12 +59,12 @@ function UsuariosViewModel() {
 
     // Para el get que obtiene la colección de usuarios completa NO pasamos datos
     self.miAjax(self.usuariosURI, 'GET').done(function (data) {
-        for (var i = 0; i < data.usuarios.length; i++) {
+        for (var i = 0; i < data.users.length; i++) {
             self.usuarios.push({
-                id: ko.observable(data.usuarios[i].id),
-                nombreUsuario: ko.observable(data.usuarios[i].nombreUsuario),
-                email: ko.observable(data.usuarios[i].email),
-                activo: ko.observable(data.usuarios[i].activo)
+                id: ko.observable(data.users[i].id_user),
+                nombreUsuario: ko.observable(data.users[i].user),
+                email: ko.observable(data.users[i].password),
+                activo : ko.observable(true)
             });
         }
     });

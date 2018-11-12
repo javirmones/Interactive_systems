@@ -8,7 +8,7 @@ from myapp.users_routes import bp_users
 
 
 # Por defecto el root es $PREFIX/var/myapp-instance
-app=Flask(__name__, instance_relative_config=False)
+app=Flask(__name__, instance_relative_config=False, static_url_path="")
 app.config.from_pyfile('../instance/development.cfg')
 
 app.register_blueprint(bp_oils)
@@ -16,7 +16,7 @@ app.register_blueprint(bp_users)
 
 @app.route('/')
 def root():
-	return app.send_static_file('static/login.html')
+	return app.send_static_file('login.html')
 
 # Este podría ir en otro Blueprint
 @app.errorhandler(404)

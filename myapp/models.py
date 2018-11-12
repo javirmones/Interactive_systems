@@ -35,11 +35,11 @@ oils = [
         ]
 
 users = [
-                {"id_user"       : "1",
+                {"id_user"       : "0",
                 "user"          : "alfceite",
                 "password"      : "123"
                 },
-                {"id_user"      : "2",
+                {"id_user"      : "1",
                 "user"          : "javoil", 
                 "password"      : "123"
                 }
