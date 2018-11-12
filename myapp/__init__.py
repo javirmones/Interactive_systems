@@ -14,6 +14,9 @@ app.config.from_pyfile('../instance/development.cfg')
 app.register_blueprint(bp_oils)
 app.register_blueprint(bp_users)
 
+@app.route('/')
+def root():
+	return app.send_static_file('static/login.html')
 
 # Este podría ir en otro Blueprint
 @app.errorhandler(404)
