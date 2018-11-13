@@ -65,32 +65,64 @@
         <table class="table table-striped" style="margin-top:50px;">
             <tr>
                 <td style="width: 1px;"></td>
-                <td><b>Información</b></td>
+                <td><b>Aceite</b></td>
                 <td><b>Opciones</b></td>
-                <td><b>Estado</b></td>
+                <td><b>Caracteristicas</b></td>
             </tr>
-            <!-- ko foreach: usuarios -->
+            <!-- ko foreach: aceites -->
             <tr>
                 <td>
                     <span data-bind="text: id" class="label"></span>
                 </td>
                 <td>
-                    <p><b>Nombre:&nbsp;&nbsp;</b><span data-bind="text: nombreUsuario"></span></p>
-                    <p><b>Email:&nbsp;&nbsp;</b><a data-bind="attr: {href: 'mailto:' + email}, text: email"></a></p>
+                    <p><b>Nombre:&nbsp;&nbsp;</b><span data-bind="text: nombreAceite"></span></p>
+                    <p><b>Familia:&nbsp;&nbsp;</b><a data-bind="attr: {href:'https://www.google.com/search?q=' + familia}, text: familia"></a></p>
                 </td>
                 <td>
-                    <button data-bind="click: $parent.editar" class="btn">Editar</button>
-                    <button data-bind="click: $parent.borrar" class="btn">Borrar</button>
+                    <button data-bind="click: $parent.mostrar_aceite" class="btn">Ficha</button>
                 </td>
                 <td>
-                    <span data-bind="visible: activo" class="badge badge-success">Activo</span>
-                    <span data-bind="visible: !activo()" class="badge badge-danger">Inactivo</span>
+                    <span data-bind="visible: etiqueta1, text: etiqueta1" class="badge badge-pill badge-primary"></span>
+                    <span data-bind="visible: etiqueta2, text: etiqueta2" class="badge badge-pill badge-primary"></span>
+                    <span data-bind="visible: etiqueta3, text: etiqueta3" class="badge badge-pill badge-primary"></span>
+                    <span data-bind="visible: etiqueta4, text: etiqueta4" class="badge badge-pill badge-primary"></span>
+                    <span data-bind="visible: etiqueta5, text: etiqueta5" class="badge badge-pill badge-primary"></span>
+                    <span data-bind="visible: etiqueta6, text: etiqueta6" class="badge badge-pill badge-primary"></span>
+                    <span data-bind="visible: etiqueta7, text: etiqueta7" class="badge badge-pill badge-primary"></span>
                 </td>
             </tr>
             <!-- /ko -->
         </table>
         <div class="row">
             <div class="col-12"><button data-bind="click: anyadir" class="btn float-right" style="margin-bottom:50px;">Añadir Usuario</button></div>
+        </div>
+    </div>
+
+    <div id="mostrar_aceite" class="modal hide fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-light">
+                    <h5>Ficha del aceite</h5>
+                    <!-- data-dismiss cierra todos los cuadros modales abiertos -->
+                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="img/potion.jpg" alt="..." class="img-thumbnail">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-bind="click: anyadirUsuario" type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -175,7 +207,7 @@
     </div>
 </div>
 
-<script src="js/code.js"></script>
+<script src="js/oils.js"></script>
 
 </body>
 
