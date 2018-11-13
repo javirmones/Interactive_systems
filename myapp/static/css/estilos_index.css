@@ -16,7 +16,7 @@
 }
 .navbar .navbar-text a:hover,
 .navbar .navbar-text a:focus {
-  color: #ecdbff; 
+  color: #ecdbff;
 }
 .navbar .navbar-nav .nav-link {
   color: #ecf0f1;
@@ -123,4 +123,14 @@
 .navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item.active {
   color: #ecdbff;
   background-color: #9885a0;
+}
+
+.modal {
+
+
+}
+.modal .modal-dialog .modal-content .modal-header {
+
+  background-color: #9a8195;
+
 }

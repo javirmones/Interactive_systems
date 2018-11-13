@@ -6,7 +6,7 @@
 
     <!-- Codificación utilizada (UTF-8) para representar bien acentos, eñes, ...  -->
     <meta charset="utf-8">
-    <title>Aceitillos</title>
+    <title>Aceites API</title>
     <!-- Meta-etiquetas para los robots araña de los buscadores -->
     <meta name="description" content="Aplicación Web CRUS Usuarios (de ejemplo)">
     <meta name="keywords" content="HTML5,CSS3,Javascript,jQuery,Bootstrap,Knockout.js, cliente Web, REST API">
@@ -46,16 +46,13 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="https://github.com/javirmones/Interactive_systems">Github</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="aceites.html">Aceites</a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="informacion.html">Información</a>
+                    </li>
                 </ul>
-
             </div>
         </div>
     </nav>
@@ -97,10 +94,10 @@
     <div id="anyadir" class="modal hide fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-primary text-light">
-                    <h5>Añadir Usuario</h5>
+                <div class="modal-header">
+                    <h5>Añadir usuario</h5>
                     <!-- data-dismiss cierra todos los cuadros modales abiertos -->
-                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -119,15 +116,15 @@
                             </div>
                         </div>
                         <div class="control-group" style="margin-top:20px;">
-                            <label class="control-label" for="inputCheckbox">Estado</label>
+
                             <div class="controls">
-                                Activo: <input type="checkbox" data-bind="checked: estado" id="inputCheckbox" checked />
+
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button data-bind="click: anyadirUsuario" type="button" class="btn btn-primary">Guardar</button>
+                    <button data-bind="click: anyadirUsuario" type="button" class="btn">Guardar</button>
                 </div>
             </div>
         </div>
@@ -137,10 +134,10 @@
     <div id="editar" class="modal hide fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-primary text-light">
-                    <h5>Editar Usuario</h5>
+                <div class="modal-header">
+                    <h5>Editar usuario</h5>
                     <!-- data-dismiss cierra todos los cuadros modales abiertos -->
-                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -161,15 +158,14 @@
                             </div>
                         </div>
                         <div class="control-group" style="margin-top:20px;">
-                            <label class="control-label" for="inputCheckbox">Estado</label>
                             <div class="controls">
-                                Activo: <input type="checkbox" data-bind="checked: estado" id="inputCheckbox" checked />
+
                             </div>
                         </div>
                     </form>
             </div>
             <div class="modal-footer">
-                <button data-bind="click: guardarModificacion" type="button" class="btn btn-primary">Guardar modificación</button>
+                <button data-bind="click: guardarModificacion" type="button" class="btn">Guardar modificación</button>
             </div>
         </div>
     </div>
