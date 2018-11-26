@@ -57,12 +57,6 @@
           </li>
         </ul>
 
-        <ol class="navbar-nav">
-          <li class="form-inline my-2 my-lg-0">
-            <a class="nav-link" href="login.html">Cerrar sesión</a>
-            <li>
-            </ol>
-
           </div>
         </div>
       </nav>
@@ -101,9 +95,7 @@
         </div>
       </div>
 
-
-
-
+      <!-- Modal de añadir usuario-->
       <div id="anyadir" class="modal hide fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -218,11 +210,12 @@
           </tr>
           <!-- /ko -->
         </table>
-        <div class="row">
-          <div class="col-12"><button data-bind="click: anyadir" class="btn float-right" style="margin-bottom:50px;">Añadir usuario</button></div>
+        <div class="row" >
+          <div class="col-12"><button id ="boton_aniadir" data-bind="click: anyadir" class="btn float-right" style="margin-bottom:50px;">Añadir usuario</button></div>
         </div>
       </div>
 
+      <!-- Modal de mostrar aceites-->
       <div id="mostrar_aceite" class="modal hide fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -252,7 +245,112 @@
         </div>
       </div>
 
-
+      <!-- Modal de añadir aceites-->
+      <div id="anyadir_aceite" class="modal hide fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5>Añadir aceite</h5>
+                <!-- data-dismiss cierra todos los cuadros modales abiertos -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+  
+              <div class="modal-body">
+                <form class="form-horizontal">
+                  <div class="control-group">
+                    <label class="control-label" for="inputNombreAceite">Nombre</label>
+                    <div class="controls">
+                      <input data-bind="value: nombreAceite" type="text" id="inputNombreAceite" placeholder="Ej. Aceite de rosas" style="width: 170px;">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                      <label class="control-label" for="inputNombreLatinoAceite">Nombre Latino</label>
+                      <div class="controls">
+                        <input data-bind="value: nombreLatinoAceite" type="text" id="inputNombreLatinoAceite" placeholder="Ej. Aceitum rosatum" style="width: 170px;">
+                      </div>
+                  </div>
+                  <div class="control-group">
+                      <label class="control-label" for="inputDesc">Descripcion</label>
+                      <div class="controls">
+                        <input data-bind="value: descripcionAceite" type="text" id="inputDesc" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+                      </div>
+                  </div>
+                  <div class="control-group">
+                      <label class="control-label" for="inputFamilia">Familia</label>
+                      <div class="controls">
+                        <input data-bind="value: familiaAceite" type="text" id="inputFamilia" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+                      </div>
+                  </div>
+                  <div class="control-group">
+                      <label class="control-label" for="inputProcedencia">Procedencia</label>
+                      <div class="controls">
+                        <input data-bind="value: procedenciaAceite" type="text" id="inputProcedencia" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+                      </div>
+                  </div>
+                  <div class="control-group">
+                      <label class="control-label" for="inputExtraccion">Extracción</label>
+                      <div class="controls">
+                        <input data-bind="value: extraccionAceite" type="text" id="inputExtraccion" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+                      </div>
+                  </div>
+                  <div class="control-group">
+                      <label class="control-label" for="inputDescOlf">Descripción Olfativa</label>
+                      <div class="controls">
+                        <input data-bind="value: descOlfAceite" type="text" id="inputDescOlf" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+                      </div>
+                  </div>
+                  <div class="control-group">
+                      <label class="control-label" for="inputApariencia">Apariencia</label>
+                      <div class="controls">
+                        <input data-bind="value: aparienciaAceite" type="text" id="inputApariencia" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+                      </div>
+                  </div>
+                  <div class="control-group">
+                      <label class="control-label" for="inputNotPerf">Nota de Perfume</label>
+                      <div class="controls">
+                        <input data-bind="value: notaPerfAceite" type="text" id="inputNotPerf" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+                      </div>
+                  </div>
+                  <div class="control-group">
+                      <label class="control-label" for="inputPerfume">Perfume</label>
+                      <div class="controls">
+                        <input data-bind="value: perfumeAceite" type="text" id="inputFamilia" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+                      </div>
+                  </div>
+                  <div class="control-group">
+                      <label class="control-label" for="inputSolubilidad">Solubilidad</label>
+                      <div class="controls">
+                        <input data-bind="value: solubilidadAceite" type="text" id="inputSolubilidad" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+                      </div>
+                  </div>
+                  <div class="control-group">
+                      <label class="control-label" for="inputUsos">Usos</label>
+                      <div class="controls">
+                        <input data-bind="value: usosAceite" type="text" id="inputUsos" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+                      </div>
+                  </div>
+                  <div class="control-group">
+                      <label class="control-label" for="inputPropiedades">Propiedades</label>
+                      <div class="controls">
+                        <input data-bind="value: propiedadesAceite" type="text" id="inputPropiedades" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+                      </div>
+                  </div>
+                  <div class="control-group" style="margin-top:20px;">
+  
+                    <div class="controls">
+  
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button data-bind="click: anyadirUsuario" type="button" class="btn">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
       <section class="jumbotron text-center" id ="informacion" >
         <div class="container">
@@ -264,29 +362,6 @@
           </p>
         </div>
       </section>
-
-<!--
-      <div class="album py-5 bg-light">
-        <div class="container">
-
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
--->
 
             <footer class="text-muted">
               <div class="container">
@@ -310,6 +385,7 @@
                 $('#prueba').show();
                 $('#cuerpo').hide();
                 $('#informacion').hide();
+                $("#boton_aniadir").text("Añadir Aceite")
               });
               $( ".nav_link_info" ).click(function() {
                 $('#informacion').show();
@@ -321,7 +397,9 @@
             </script>
 
             <script src="js/users.js"></script>
+            <script src="js/oils.js"></script>
 
+           
           </body>
 
           </html>

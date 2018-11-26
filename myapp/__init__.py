@@ -16,7 +16,7 @@ app.register_blueprint(bp_users)
 
 @app.route('/')
 def root():
-	return app.send_static_file('login.html')
+	return app.send_static_file('index.html')
 
 # Este podría ir en otro Blueprint
 @app.errorhandler(404)

@@ -3,26 +3,27 @@
 
 import random
 import json
-from flask import Blueprint, jsonify, abort, make_response, request, url_for
+from flask import Blueprint, jsonify, abort, make_response, request, url_for, render_template, redirect
 
 from myapp.models import users
 
 bp_users = Blueprint("bp_users", __name__)
 
 # OPERACIONES sobre users
+
 @bp_users.route('/users/', methods = ['GET'])
 def getUsers():
     return make_response(jsonify({'users':users}), 200)
 
 def delUser(id_user):
-    aux = list(filter(lambda t:t['name'] == id_user, users))
+    aux = list(filter(lambda t:t['user'] == id_user, users))
     if len(aux) == 0:
         abort(404)
     users.remove(aux[0])
     return make_response(jsonify({'deleted':aux[0]['name']}), 200)
 
 def getUser(id_user):    
-    aux = list(filter(lambda t:t['id_user'] == str(id_user), users))
+    aux = list(filter(lambda t:t['user'] == str(id_user), users))
     if len(aux) == 0:
         abort(404)
     return make_response(jsonify(aux[0]), 200)
@@ -57,3 +58,21 @@ def manager_users(id_user):
         return addUser(id_user)
     elif request.method == 'DELETE':
         return delUser(id_user)
+
+@bp_users.route('/login/', methods = ['POST'])
+def make_login():
+    
+    user        = ""
+    password    = ""
+
+    if request.json and 'user' in request.json:
+
+        user        = request.json['user']
+        password    = request.json['password']
+
+    aux = list(filter(lambda t:t['user'] == user, users))
+
+    if len(aux) != 0:
+        if (aux[0]['user'] == user):
+            if(aux[0]['password'] == password):
+                return redirect(url_for('127.0.0.1:5000/index.html'))

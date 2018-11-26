@@ -25,17 +25,15 @@ function UsuariosViewModel() {
   self.anyadir = function () {
     $('#anyadir').modal('show');
   }
-  self.mostrar_aceite = function (){
-      $('#mostrar_aceite').modal('show');
-  }
+
 
   self.guardarNuevo = function (usuario) {
     self.miAjax(self.usuariosURI, 'POST', usuario).done(
       function(data) {
         self.usuarios.push({
-          id: ko.observable(data.usuario.id),
-          nombreUsuario: ko.observable(data.usuario.nombreUsuario),
-          email: ko.observable(data.usuario.email),
+          id_user: ko.observable(data.usuario.id),
+          user: ko.observable(data.usuario.nombreUsuario),
+          password: ko.observable(data.usuario.email),
           activo: ko.observable(data.usuario.activo)
         });
       }
@@ -76,6 +74,7 @@ function UsuariosViewModel() {
   }
 
   var usuariosViewModel = new UsuariosViewModel();
+
 
   // Nuevo Modelo de Vista para anyadir usuarios
   function AnyadirUsuarioViewModel() {
