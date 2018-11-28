@@ -38,17 +38,19 @@ oils = [
                 }
         ]
 
-users = [
-                {"id_user"       : "0",
-                "user"           : "alfceite",
+usuarios = [
+                {"id"            : "0",
+                "nombreUsuario"  : "alfceite",
+				"email"          : "alfceite@oils.com",
                 "password"       : "123",
-                "email"          : "alfceite@oils.com",
-                "telefono"       : "999-999-999"
+                
+               
                 },
-                {"id_user"      : "1",
-                "user"          : "javoil", 
+                {"id"           : "1",
+                "nombreUsuario" : "javoil",
+				"email"         : "javoil@oils.com", 
                 "password"      : "123",
-                "email"         : "javoil@oils.com",
-                "telefono"      : "777-777-777"
+                
+                
                 }
         ]

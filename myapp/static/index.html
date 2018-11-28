@@ -78,6 +78,7 @@
             <td>
               <p><b>Nombre:&nbsp;&nbsp;</b><span data-bind="text: nombreUsuario"></span></p>
               <p><b>Email:&nbsp;&nbsp;</b><a data-bind="attr: {href: 'mailto:' + email}, text: email"></a></p>
+
             </td>
             <td>
               <button data-bind="click: $parent.editar" class="btn">Editar</button>
@@ -85,13 +86,14 @@
             </td>
             <td>
               <span data-bind="visible: activo" class="badge badge-success">Activo</span>
-              <span data-bind="visible: !activo()" class="badge badge-danger">Inactivo</span>
+                   <span data-bind="visible: !activo()" class="badge badge-danger">Inactivo</span>
+
             </td>
           </tr>
           <!-- /ko -->
         </table>
         <div class="row">
-          <div class="col-12"><button data-bind="click: anyadir" class="btn float-right" style="margin-bottom:50px;">Añadir Usuario</button></div>
+          <div class="col-12"><button data-bind="click: anyadir" class="btn float-right" style="margin-bottom:50px;">Añadir usuario</button></div>
         </div>
       </div>
 
@@ -234,12 +236,18 @@
                     <div class="col-md-4">
                       <img src="img/potion.jpg" alt="..." class="img-thumbnail">
                     </div>
+                    <td>
+                      <span data-bind="visible: etiqueta1, text: etiqueta1" class="badge badge-pill "></span>
+                      <span data-bind="visible: etiqueta2, text: etiqueta2" class="badge badge-pill "></span>
+                      <span data-bind="visible: etiqueta3, text: etiqueta3" class="badge badge-pill "></span>
+                      <span data-bind="visible: etiqueta4, text: etiqueta4" class="badge badge-pill "></span>
+                      <span data-bind="visible: etiqueta5, text: etiqueta5" class="badge badge-pill "></span>
+                      <span data-bind="visible: etiqueta6, text: etiqueta6" class="badge badge-pill "></span>
+                      <span data-bind="visible: etiqueta7, text: etiqueta7" class="badge badge-pill "></span>
+                    </td>
                   </div>
                 </div>
               </form>
-            </div>
-            <div class="modal-footer">
-              <button data-bind="click: anyadirUsuario" type="button" class="btn">Guardar</button>
             </div>
           </div>
         </div>
@@ -256,7 +264,7 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-  
+
               <div class="modal-body">
                 <form class="form-horizontal">
                   <div class="control-group">
@@ -338,9 +346,9 @@
                       </div>
                   </div>
                   <div class="control-group" style="margin-top:20px;">
-  
+
                     <div class="controls">
-  
+
                     </div>
                   </div>
                 </form>
@@ -378,6 +386,134 @@
                 $('#cuerpo').show();
                 $('#prueba').hide();
                 $('#informacion').hide();
+                function UsuariosViewModel() {
+                    var self = this;
+                    self.usuariosURI = 'http://localhost:5000/users/';
+                    self.usuarios = ko.observableArray();
+
+                    self.miAjax = function (uri, method, data) {
+                        var request = {
+                            url: uri,
+                            type: method,
+                            contentType: "application/json",
+                            accepts: "application/json",
+                            cache: false,
+                            dataType: 'json',
+                            data: JSON.stringify(data),
+                            error: function (jqXHR) {
+                                console.log("Se ha producido un error en una petición Ajax: " + jqXHR.status);
+                            }
+                        };
+
+                        return $.ajax(request);
+                    }
+
+                    self.anyadir = function () {
+                        $('#anyadir').modal('show');
+                    }
+
+                    self.guardarNuevo = function (usuario) {
+                        self.miAjax(self.usuariosURI, 'POST', usuario).done(
+                            function(data) {
+                                self.usuarios.push({
+                                    id: ko.observable(data.usuario.id),
+                                    nombreUsuario: ko.observable(data.usuario.nombreUsuario),
+                                    email: ko.observable(data.usuario.email),
+                                    password: ko.observable(data.usuario.password)
+                                });
+                            }
+                        );
+                    }
+
+                    self.editar = function (usuario) {
+                        editarUsuarioViewModel.mostrarUsuario(usuario);
+                        $('#editar').modal('show');
+                    }
+
+                    self.guardarModificacion = function (usuarioOriginal, usuarioModificado) {
+                        self.miAjax(self.usuariosURI + usuarioModificado.id + '/', 'PUT', usuarioModificado).done(
+                            function (data) {
+                                data.usuario.id = ko.observable(data.usuario.id);
+                                data.usuario.nombreUsuario = ko.observable(data.usuario.nombreUsuario);
+                                data.usuario.email = ko.observable(data.usuario.email);
+                                data.usuario.password = ko.observable(data.usuario.password);
+                                self.usuarios.replace(usuarioOriginal,data.usuario);
+                            });
+                    }
+
+                    self.borrar = function (usuario) {
+                        alert("Borrar: " + usuario.nombreUsuario());
+                    }
+
+                    // Para el get que obtiene la colección de usuarios completa NO pasamos datos
+                    self.miAjax(self.usuariosURI, 'GET').done(function (data) {
+                        for (var i = 0; i < data.usuarios.length; i++) {
+                            self.usuarios.push({
+                                id: ko.observable(data.usuarios[i].id),
+                                nombreUsuario: ko.observable(data.usuarios[i].nombreUsuario),
+                                email: ko.observable(data.usuarios[i].email),
+                                password: ko.observable(data.usuarios[i].password)
+                            });
+                        }
+                    });
+                }
+
+                var usuariosViewModel = new UsuariosViewModel();
+
+                // Nuevo Modelo de Vista para anyadir usuarios
+                function AnyadirUsuarioViewModel() {
+                    var self = this;
+                    self.nombreUsuario = ko.observable();
+                    self.email = ko.observable();
+                    self.estado= ko.observable(true);
+
+                    self.anyadirUsuario = function() {
+                        $('#anyadir').modal('hide');
+
+                        usuariosViewModel.guardarNuevo({
+                            nombreUsuario: self.nombreUsuario(),
+                            email: self.email(),
+                            activo: self.estado()
+                        });
+                        self.nombreUsuario("");
+                        self.email("");
+                    }
+                }
+
+                // Nuevo Modelo de Vista para editar usuarios
+                function EditarUsuarioViewModel() {
+                    var self = this;
+                    self.id = ko.observable();
+                    self.nombreUsuario = ko.observable();
+                    self.email = ko.observable();
+                    self.estado= ko.observable(true);
+
+                    self.mostrarUsuario = function(usuario) {
+                        // Lo copia antes de modificarlo
+                        self.usuario = usuario;
+                        self.id(usuario.id())
+                        self.nombreUsuario(usuario.nombreUsuario());
+                        self.email(usuario.email());
+                        self.estado(usuario.activo());
+                    }
+
+                    self.guardarModificacion = function(){
+                        $('#editar'). modal('hide');
+                        usuariosViewModel.guardarModificacion(self.usuario, {
+                            id: self.id(),
+                            nombreUsuario: self.nombreUsuario(),
+                            email: self.email(),
+                            activo: self.estado()
+                        })
+                    }
+                }
+
+                var anyadirUsuarioViewModel = new AnyadirUsuarioViewModel();
+                ko.applyBindings(usuariosViewModel, $('#cuerpo')[0]);
+                ko.applyBindings(anyadirUsuarioViewModel, $('#anyadir')[0]);
+                var editarUsuarioViewModel = new EditarUsuarioViewModel();
+                ko.applyBindings(editarUsuarioViewModel, $('#editar')[0]);
+
               });
 
 
@@ -385,7 +521,7 @@
                 $('#prueba').show();
                 $('#cuerpo').hide();
                 $('#informacion').hide();
-                $("#boton_aniadir").text("Añadir Aceite")
+                $("#boton_aniadir").hide();
               });
               $( ".nav_link_info" ).click(function() {
                 $('#informacion').show();
@@ -397,9 +533,10 @@
             </script>
 
             <script src="js/users.js"></script>
+
             <script src="js/oils.js"></script>
 
-           
+
           </body>
 
           </html>

@@ -5,74 +5,60 @@ import random
 import json
 from flask import Blueprint, jsonify, abort, make_response, request, url_for, render_template, redirect
 
-from myapp.models import users
+from myapp.models import usuarios
 
 bp_users = Blueprint("bp_users", __name__)
 
 # OPERACIONES sobre users
 
 @bp_users.route('/users/', methods = ['GET'])
+# Obtener todos los usuarios
 def getUsers():
-    return make_response(jsonify({'users':users}), 200)
+    return make_response(jsonify({'usuarios':usuarios}), 200)
 
-def delUser(id_user):
-    aux = list(filter(lambda t:t['user'] == id_user, users))
-    if len(aux) == 0:
-        abort(404)
-    users.remove(aux[0])
-    return make_response(jsonify({'deleted':aux[0]['name']}), 200)
-
-def getUser(id_user):    
-    aux = list(filter(lambda t:t['user'] == str(id_user), users))
+# Obtener un usuario
+def getUser(id_user):
+    aux = list(filter(lambda t:t['id'] == id_user, usuarios))
     if len(aux) == 0:
         abort(404)
     return make_response(jsonify(aux[0]), 200)
 
-def addUser(id_user):
-    aux = list(filter(lambda t:t['user'] == id_user, users))
-    
-    user        = ""
-    password    = ""
+# Eliminar un usuario
+def delUser(id_user):
+    aux = list(filter(lambda t:t['id'] == str(id_user), usuarios))
+    if len(aux) == 0:
+        abort(404)
+    usuarios.remove(aux[0])
+    return make_response(jsonify({'deleted':aux[0]['nombreUsuario']}), 200)
 
-    if request.json and 'user' in request.json:
+# Aniadir usuario
+@bp_users.route('/users/', methods = ['POST'])
+def addUser():
+    if not request.json or not 'email' in request.json:
+        abort(404)
+    aux = int(usuarios[-1].get('id')) + 1
+    id = str(aux)
+    nombreUsuario = str(request.json.get('nombreUsuario'))
+    email = str(request.json.get('email'))
+    password = str(request.json.get('password'))
+    usuario = {'id': id, 'nombreUsuario': nombreUsuario, 'email': email ,'password': password }
+    usuarios.append(usuario)
+    return make_response(jsonify({'usuario':usuario}),201)
 
-        user        = request.json['user']
-        password    = request.json['password']
+#editar usuario
+def edit_user(id):
+    usuario = [usuario for usuario in usuarios if usuario ['id'] == id]
+    usuario[0]['nombreUsuario'] = request.json.get('nombreUsuario', usuario[0]['nombreUsuario'])
+    usuario[0]['email'] = request.json.get('email',usuario[0]['email'])
+    usuario[0]['password'] = request.json.get('password', usuario[0]['password'])
+    return make_response(jsonify({'usuarios':usuario[0]}))
 
-    if len(aux) != 0:
-        aux[0]['user'] = user
-        return make_response(jsonify({"updated":str(user)}), 200)
-        
-    new_user = {"id_user"   : str(id_user),
-                "user"      : str(user),
-                "password"  : str(password)
-                }
-    users.append(new_user)
-    return make_response(jsonify({"id_user":str(id_user)}), 201)
-
-@bp_users.route('/users/<path:id_user>', methods = ['DELETE', 'PUT', 'GET'])
+#manager usuarios
+@bp_users.route('/users/<path:id_user>/', methods = ['DELETE', 'PUT', 'GET'])
 def manager_users(id_user):
     if request.method == 'GET':
         return getUser(id_user)
     elif request.method == 'PUT':
-        return addUser(id_user)
+        return edit_user(id_user)
     elif request.method == 'DELETE':
         return delUser(id_user)
-
-@bp_users.route('/login/', methods = ['POST'])
-def make_login():
-    
-    user        = ""
-    password    = ""
-
-    if request.json and 'user' in request.json:
-
-        user        = request.json['user']
-        password    = request.json['password']
-
-    aux = list(filter(lambda t:t['user'] == user, users))
-
-    if len(aux) != 0:
-        if (aux[0]['user'] == user):
-            if(aux[0]['password'] == password):
-                return redirect(url_for('127.0.0.1:5000/index.html'))
