@@ -56,7 +56,6 @@ function UsuariosViewModel() {
 
     self.borrar = function (usuario) {
         alert("Borrar: " + usuario.nombreUsuario());
-        console.log("Wingardium");
         console.log(usuario.id());
         self.miAjax(self.usuariosURI + usuario.id() +'/','DELETE').done(
           function(data) {});

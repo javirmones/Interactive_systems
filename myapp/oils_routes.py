@@ -13,20 +13,20 @@ bp_oils=Blueprint("bp_oils", __name__)
 @bp_oils.route('/oils/', methods = ['GET'])
 def getOils():
     return make_response(jsonify({"oils":oils}), 200)
-
+# Eliminar aceite
 def delOil(id_oil):
-    aux = list(filter(lambda t:t['nombre'] == id_oil, oils))
+    aux = list(filter(lambda t:t['id_oil'] == str(id_oil), oils))
     if len(aux) == 0:
         abort(404)
     oils.remove(aux[0])
     return make_response(jsonify({'deleted':aux[0]['nombre']}), 200)
-
-def getOil(id_oil):    
+# Obtener aceite
+def getOil(id_oil):
     aux = list(filter(lambda t:t['id_oil'] == str(id_oil), oils))
     if len(aux) == 0:
         abort(404)
     return make_response(jsonify(aux[0]), 200)
-
+# Aniadir aceite 
 def addOil(id_oil):
     aux = list(filter(lambda t:t['nombre'] == id_oil, oils))
 
@@ -62,7 +62,7 @@ def addOil(id_oil):
     if len(aux) != 0:
         aux[0]['nombre'] = nombre
         return make_response(jsonify({"updated":str(nombre)}), 200)
-        
+
     new_id = int(oils[-1]['id_oil']+1)
 
     new_ps = {"id_oil"              : str(new_id),
@@ -83,7 +83,7 @@ def addOil(id_oil):
     oils.append(new_ps)
     return make_response(jsonify({"id_oil":str(id_oil)}), 200)
 
-@bp_oils.route('/oils/<path:id_oil>', methods = ['DELETE', 'PUT', 'GET'])
+@bp_oils.route('/oils/<path:id_oil>/', methods = ['DELETE', 'PUT', 'GET'])
 def manager_oils(id_oil):
     if request.method == 'GET':
         return getOil(id_oil)

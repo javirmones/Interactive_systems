@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # -*- coding:utf-8; tab-width:4; mode:python -*-
 
-oils = [ 
+#   Models using JSON 
+oils = [
                 {"id_oil"               : "0",
                 "nombre"                : "Albahaca de Comoros",
                 "nombreLatino"          : "Ocimum basilicum",
@@ -43,14 +44,14 @@ usuarios = [
                 "nombreUsuario"  : "alfceite",
 				"email"          : "alfceite@oils.com",
                 "password"       : "123",
-                
-               
+
+
                 },
                 {"id"           : "1",
                 "nombreUsuario" : "javoil",
-				"email"         : "javoil@oils.com", 
+				"email"         : "javoil@oils.com",
                 "password"      : "123",
-                
-                
+
+
                 }
         ]

@@ -23,9 +23,7 @@ function AceitesViewModel() {
     self.mostrar_aceite = function (){
         $('#mostrar_aceite').modal('show');
     }
-    self.anyadir = function () {
-        $('#anyadir_aceite').modal('show');
-      }
+
 
     self.guardarNuevoAceite = function (aceite) {
         self.miAjax(self.aceitesURI, 'POST', aceite).done(
@@ -39,7 +37,30 @@ function AceitesViewModel() {
           }
         );
       }
-
+    self.borrar = function(aceite){
+      alert("Borrar " +aceite.nombreAceite());
+      self.miAjax(self.aceitesURI + aceite.id() +'/','DELETE').done(
+        function(data) {});
+        console.log(self.aceites.length);
+        self.aceites.removeAll();
+        console.log(self.aceites.length);
+        self.miAjax(self.aceitesURI, 'GET').done(function (data) {
+            for (var i = 0; i < data.oils.length; i++) {
+                self.aceites.push({
+                    id: ko.observable(data.oils[i].id_oil),
+                    nombreAceite: ko.observable(data.oils[i].nombre),
+                    familia: ko.observable(data.oils[i].familia),
+                    etiqueta1 : ko.observable(data.oils[i].etiquetas[1]),
+                    etiqueta2 : ko.observable(data.oils[i].etiquetas[2]),
+                    etiqueta3 : ko.observable(data.oils[i].etiquetas[3]),
+                    etiqueta4 : ko.observable(data.oils[i].etiquetas[4]),
+                    etiqueta5 : ko.observable(data.oils[i].etiquetas[5]),
+                    etiqueta6 : ko.observable(data.oils[i].etiquetas[6]),
+                    etiqueta7 : ko.observable(data.oils[i].etiquetas[7])
+                });
+            }
+        });
+    }
     // Para el get que obtiene la colección de aceites completa NO pasamos datos
     self.miAjax(self.aceitesURI, 'GET').done(function (data) {
         for (var i = 0; i < data.oils.length; i++) {
@@ -50,7 +71,7 @@ function AceitesViewModel() {
                 etiqueta1 : ko.observable(data.oils[i].etiquetas[1]),
                 etiqueta2 : ko.observable(data.oils[i].etiquetas[2]),
                 etiqueta3 : ko.observable(data.oils[i].etiquetas[3]),
-                etiqueta4 : ko.observable(data.oils[i].etiquetas[4]),                
+                etiqueta4 : ko.observable(data.oils[i].etiquetas[4]),
                 etiqueta5 : ko.observable(data.oils[i].etiquetas[5]),
                 etiqueta6 : ko.observable(data.oils[i].etiquetas[6]),
                 etiqueta7 : ko.observable(data.oils[i].etiquetas[7])
@@ -74,7 +95,7 @@ function AnyadirAceitesViewModel() {
     self.solubilidadAceite     = ko.observable();
     self.usosAceite            = ko.observable();
     self.propiedadesAceite     = ko.observable();
-    
+
 
     self.anyadirAceites = function() {
       $('#anyadir_aceite').modal('hide');
@@ -88,6 +109,8 @@ function AnyadirAceitesViewModel() {
       self.email("");
     }
   }
+
+
 
 var aceitesViewModel = new AceitesViewModel();
 ko.applyBindings(aceitesViewModel, $('#prueba')[0]);

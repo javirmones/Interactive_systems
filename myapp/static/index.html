@@ -57,486 +57,334 @@
           </li>
         </ul>
 
-          </div>
-        </div>
-      </nav>
-
-      <div id="cuerpo" class="container">
-        <!-- Tabla estilo cebra con datos vinculados  -->
-        <table class="table table-striped" style="margin-top:50px;">
-          <tr>
-            <td style="width: 1px;"></td>
-            <td><b>Información</b></td>
-            <td><b>Opciones</b></td>
-            <td><b>Estado</b></td>
-          </tr>
-          <!-- ko foreach: usuarios -->
-          <tr>
-            <td>
-              <span data-bind="text: id" class="label"></span>
-            </td>
-            <td>
-              <p><b>Nombre:&nbsp;&nbsp;</b><span data-bind="text: nombreUsuario"></span></p>
-              <p><b>Email:&nbsp;&nbsp;</b><a data-bind="attr: {href: 'mailto:' + email}, text: email"></a></p>
-
-            </td>
-            <td>
-              <button data-bind="click: $parent.editar" class="btn">Editar</button>
-              <button data-bind="click: $parent.borrar" class="btn">Borrar</button>
-            </td>
-            <td>
-              <span data-bind="visible: activo" class="badge badge-success">Activo</span>
-                   <span data-bind="visible: !activo()" class="badge badge-danger">Inactivo</span>
-
-            </td>
-          </tr>
-          <!-- /ko -->
-        </table>
-        <div class="row">
-          <div class="col-12"><button data-bind="click: anyadir" class="btn float-right" style="margin-bottom:50px;">Añadir usuario</button></div>
-        </div>
       </div>
+    </div>
+  </nav>
 
-      <!-- Modal de añadir usuario-->
-      <div id="anyadir" class="modal hide fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5>Añadir usuario</h5>
-              <!-- data-dismiss cierra todos los cuadros modales abiertos -->
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
+  <div id="cuerpo" class="container">
+    <!-- Tabla estilo cebra con datos vinculados  -->
+    <table class="table table-striped" style="margin-top:50px;">
+      <tr>
+        <td style="width: 1px;"></td>
+        <td><b>Información</b></td>
+        <td><b>Opciones</b></td>
+        <td><b>Estado</b></td>
+      </tr>
+      <!-- ko foreach: usuarios -->
+      <tr>
+        <td>
+          <span data-bind="text: id" class="label"></span>
+        </td>
+        <td>
+          <p><b>Nombre:&nbsp;&nbsp;</b><span data-bind="text: nombreUsuario"></span></p>
+          <p><b>Email:&nbsp;&nbsp;</b><a data-bind="attr: {href: 'mailto:' + email}, text: email"></a></p>
 
-            <div class="modal-body">
-              <form class="form-horizontal">
-                <div class="control-group">
-                  <label class="control-label" for="inputNombre">Nombre</label>
-                  <div class="controls">
-                    <input data-bind="value: nombreUsuario" type="text" id="inputNombre" placeholder="Ej. Syd Barret" style="width: 150px;">
-                  </div>
-                </div>
-                <div class="control-group" style="margin-top:20px;">
-                  <label class="control-label" for="inputEmail">Email</label>
-                  <div class="controls">
-                    <input data-bind="value: email" type="email" id="inputEmail" placeholder="Ej. syd_barret@pinkfloyd.com" style="width: 300px;">
-                  </div>
-                </div>
-                <div class="control-group" style="margin-top:20px;">
+        </td>
+        <td>
+          <button data-bind="click: $parent.editar" class="btn">Editar</button>
+          <button data-bind="click: $parent.borrar" class="btn">Borrar</button>
+        </td>
+        <td>
+          <span data-bind="visible: activo" class="badge badge-success">Activo</span>
+          <span data-bind="visible: !activo()" class="badge badge-danger">Inactivo</span>
 
-                  <div class="controls">
+        </td>
+      </tr>
+      <!-- /ko -->
+    </table>
+    <div class="row">
+      <div class="col-12"><button data-bind="click: anyadir" class="btn float-right" style="margin-bottom:50px;">Añadir usuario</button></div>
+    </div>
+  </div>
 
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button data-bind="click: anyadirUsuario" type="button" class="btn">Guardar</button>
-            </div>
-          </div>
+  <!-- Modal de añadir usuario-->
+  <div id="anyadir" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>Añadir usuario</h5>
+          <!-- data-dismiss cierra todos los cuadros modales abiertos -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </div>
 
-      <!-- Cuadro de dialogo para editar un usuario -->
-      <div id="editar" class="modal hide fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5>Editar usuario</h5>
-              <!-- data-dismiss cierra todos los cuadros modales abiertos -->
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form class="form-horizontal">
-                <div class="control-group">
-                  <label class="control-label" for="inputNombre">Nombre</label>
-                  <div class="controls">
-                    <input data-bind="value: nombreUsuario" type="text" id="inputNombre" placeholder="Ej. Syd Barret"
-                    style="width: 150px;">
-                  </div>
-                </div>
-                <div class="control-group" style="margin-top:20px;">
-                  <label class="control-label" for="inputEmail">Email</label>
-                  <div class="controls">
-                    <input data-bind="value: email" type="email" id="inputEmail" placeholder="Ej. syd_barret@pinkfloyd.com"
-                    style="width: 300px;">
-                  </div>
-                </div>
-                <div class="control-group" style="margin-top:20px;">
-                  <div class="controls">
-
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button data-bind="click: guardarModificacion" type="button" class="btn">Guardar modificación</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="prueba" class="container">
-        <!-- Tabla estilo cebra con datos vinculados  -->
-        <table class="table table-striped" style="margin-top:50px;">
-          <tr>
-            <td style="width: 1px;"></td>
-            <td><b>Aceite</b></td>
-            <td><b>Opciones</b></td>
-            <td><b>Caracteristicas</b></td>
-          </tr>
-          <!-- ko foreach: aceites -->
-          <tr>
-            <td>
-              <span data-bind="text: id" class="label"></span>
-            </td>
-            <td>
-              <p><b>Nombre:&nbsp;&nbsp;</b><span data-bind="text: nombreAceite"></span></p>
-              <p><b>Familia:&nbsp;&nbsp;</b><a data-bind="attr: {href:'https://www.google.com/search?q=' + familia}, text: familia"></a></p>
-            </td>
-            <td>
-              <button data-bind="click: $parent.mostrar_aceite" class="btn">Ficha</button>
-            </td>
-            <td>
-              <span data-bind="visible: etiqueta1, text: etiqueta1" class="badge badge-pill "></span>
-              <span data-bind="visible: etiqueta2, text: etiqueta2" class="badge badge-pill "></span>
-              <span data-bind="visible: etiqueta3, text: etiqueta3" class="badge badge-pill "></span>
-              <span data-bind="visible: etiqueta4, text: etiqueta4" class="badge badge-pill "></span>
-              <span data-bind="visible: etiqueta5, text: etiqueta5" class="badge badge-pill "></span>
-              <span data-bind="visible: etiqueta6, text: etiqueta6" class="badge badge-pill "></span>
-              <span data-bind="visible: etiqueta7, text: etiqueta7" class="badge badge-pill "></span>
-            </td>
-          </tr>
-          <!-- /ko -->
-        </table>
-        <div class="row" >
-          <div class="col-12"><button id ="boton_aniadir" data-bind="click: anyadir" class="btn float-right" style="margin-bottom:50px;">Añadir usuario</button></div>
-        </div>
-      </div>
-
-      <!-- Modal de mostrar aceites-->
-      <div id="mostrar_aceite" class="modal hide fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5>Ficha del aceite</h5>
-              <!-- data-dismiss cierra todos los cuadros modales abiertos -->
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-
-            <div class="modal-body">
-              <form class="form-horizontal">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <img src="img/potion.jpg" alt="..." class="img-thumbnail">
-                    </div>
-                    <td>
-                      <span data-bind="visible: etiqueta1, text: etiqueta1" class="badge badge-pill "></span>
-                      <span data-bind="visible: etiqueta2, text: etiqueta2" class="badge badge-pill "></span>
-                      <span data-bind="visible: etiqueta3, text: etiqueta3" class="badge badge-pill "></span>
-                      <span data-bind="visible: etiqueta4, text: etiqueta4" class="badge badge-pill "></span>
-                      <span data-bind="visible: etiqueta5, text: etiqueta5" class="badge badge-pill "></span>
-                      <span data-bind="visible: etiqueta6, text: etiqueta6" class="badge badge-pill "></span>
-                      <span data-bind="visible: etiqueta7, text: etiqueta7" class="badge badge-pill "></span>
-                    </td>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Modal de añadir aceites-->
-      <div id="anyadir_aceite" class="modal hide fade" tabindex="-1" role="dialog">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5>Añadir aceite</h5>
-                <!-- data-dismiss cierra todos los cuadros modales abiertos -->
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-
-              <div class="modal-body">
-                <form class="form-horizontal">
-                  <div class="control-group">
-                    <label class="control-label" for="inputNombreAceite">Nombre</label>
-                    <div class="controls">
-                      <input data-bind="value: nombreAceite" type="text" id="inputNombreAceite" placeholder="Ej. Aceite de rosas" style="width: 170px;">
-                    </div>
-                  </div>
-                  <div class="control-group">
-                      <label class="control-label" for="inputNombreLatinoAceite">Nombre Latino</label>
-                      <div class="controls">
-                        <input data-bind="value: nombreLatinoAceite" type="text" id="inputNombreLatinoAceite" placeholder="Ej. Aceitum rosatum" style="width: 170px;">
-                      </div>
-                  </div>
-                  <div class="control-group">
-                      <label class="control-label" for="inputDesc">Descripcion</label>
-                      <div class="controls">
-                        <input data-bind="value: descripcionAceite" type="text" id="inputDesc" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
-                      </div>
-                  </div>
-                  <div class="control-group">
-                      <label class="control-label" for="inputFamilia">Familia</label>
-                      <div class="controls">
-                        <input data-bind="value: familiaAceite" type="text" id="inputFamilia" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
-                      </div>
-                  </div>
-                  <div class="control-group">
-                      <label class="control-label" for="inputProcedencia">Procedencia</label>
-                      <div class="controls">
-                        <input data-bind="value: procedenciaAceite" type="text" id="inputProcedencia" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
-                      </div>
-                  </div>
-                  <div class="control-group">
-                      <label class="control-label" for="inputExtraccion">Extracción</label>
-                      <div class="controls">
-                        <input data-bind="value: extraccionAceite" type="text" id="inputExtraccion" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
-                      </div>
-                  </div>
-                  <div class="control-group">
-                      <label class="control-label" for="inputDescOlf">Descripción Olfativa</label>
-                      <div class="controls">
-                        <input data-bind="value: descOlfAceite" type="text" id="inputDescOlf" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
-                      </div>
-                  </div>
-                  <div class="control-group">
-                      <label class="control-label" for="inputApariencia">Apariencia</label>
-                      <div class="controls">
-                        <input data-bind="value: aparienciaAceite" type="text" id="inputApariencia" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
-                      </div>
-                  </div>
-                  <div class="control-group">
-                      <label class="control-label" for="inputNotPerf">Nota de Perfume</label>
-                      <div class="controls">
-                        <input data-bind="value: notaPerfAceite" type="text" id="inputNotPerf" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
-                      </div>
-                  </div>
-                  <div class="control-group">
-                      <label class="control-label" for="inputPerfume">Perfume</label>
-                      <div class="controls">
-                        <input data-bind="value: perfumeAceite" type="text" id="inputFamilia" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
-                      </div>
-                  </div>
-                  <div class="control-group">
-                      <label class="control-label" for="inputSolubilidad">Solubilidad</label>
-                      <div class="controls">
-                        <input data-bind="value: solubilidadAceite" type="text" id="inputSolubilidad" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
-                      </div>
-                  </div>
-                  <div class="control-group">
-                      <label class="control-label" for="inputUsos">Usos</label>
-                      <div class="controls">
-                        <input data-bind="value: usosAceite" type="text" id="inputUsos" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
-                      </div>
-                  </div>
-                  <div class="control-group">
-                      <label class="control-label" for="inputPropiedades">Propiedades</label>
-                      <div class="controls">
-                        <input data-bind="value: propiedadesAceite" type="text" id="inputPropiedades" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
-                      </div>
-                  </div>
-                  <div class="control-group" style="margin-top:20px;">
-
-                    <div class="controls">
-
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button data-bind="click: anyadirUsuario" type="button" class="btn">Guardar</button>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label" for="inputNombre">Nombre</label>
+              <div class="controls">
+                <input data-bind="value: nombreUsuario" type="text" id="inputNombre" placeholder="Javier Monescillo" style="width: 150px;">
               </div>
             </div>
-          </div>
-        </div>
+            <div class="control-group" style="margin-top:20px;">
+              <label class="control-label" for="inputEmail">Email</label>
+              <div class="controls">
+                <input data-bind="value: email" type="email" id="inputEmail" placeholder="Alfonso@Barragan.com" style="width: 300px;">
+              </div>
+            </div>
+            <div class="control-group" style="margin-top:20px;">
 
-      <section class="jumbotron text-center" id ="informacion" >
-        <div class="container">
-          <h1 class="jumbotron-heading">Práctica de sistemas interactivos sobre el desarrollo de un cliente web con Knockout.js </h1>
-          <p class="lead text-muted">Alfonso Barragán Carmona</p>
-          <p class="lead text-muted">Javier Monescillo Buitrón</p>
-          <p>
-            Incluir tecnologías utilizadas TO-DO
-          </p>
-        </div>
-      </section>
-
-            <footer class="text-muted">
-              <div class="container">
-                <p class="float-right">
-                  <a href="#">Subir arriba</a>
-                </p>
+              <div class="controls">
 
               </div>
-            </footer>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button data-bind="click: anyadirUsuario" type="button" class="btn">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            <script>
-            $( document ).ready(function() {
-              $( ".nav_link_home" ).click(function() {
-                $('#cuerpo').show();
-                $('#prueba').hide();
-                $('#informacion').hide();
-                function UsuariosViewModel() {
-                    var self = this;
-                    self.usuariosURI = 'http://localhost:5000/users/';
-                    self.usuarios = ko.observableArray();
+  <!-- Cuadro de dialogo para editar un usuario -->
+  <div id="editar" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>Editar usuario</h5>
+          <!-- data-dismiss cierra todos los cuadros modales abiertos -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label" for="inputNombre">Nombre</label>
+              <div class="controls">
+                <input data-bind="value: nombreUsuario" type="text" id="inputNombre" placeholder="Ej. Javier Monescillo"
+                style="width: 150px;">
+              </div>
+            </div>
+            <div class="control-group" style="margin-top:20px;">
+              <label class="control-label" for="inputEmail">Email</label>
+              <div class="controls">
+                <input data-bind="value: email" type="email" id="inputEmail" placeholder="Ej. Alfonso@Barragan.com"
+                style="width: 300px;">
+              </div>
+            </div>
+            <div class="control-group" style="margin-top:20px;">
+              <div class="controls">
 
-                    self.miAjax = function (uri, method, data) {
-                        var request = {
-                            url: uri,
-                            type: method,
-                            contentType: "application/json",
-                            accepts: "application/json",
-                            cache: false,
-                            dataType: 'json',
-                            data: JSON.stringify(data),
-                            error: function (jqXHR) {
-                                console.log("Se ha producido un error en una petición Ajax: " + jqXHR.status);
-                            }
-                        };
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button data-bind="click: guardarModificacion" type="button" class="btn">Guardar modificación</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-                        return $.ajax(request);
-                    }
+  <!-- Tabla de aceites -->
+  <div id="prueba" class="container">
+    <!-- Tabla estilo cebra con datos vinculados  -->
+    <table class="table table-striped" style="margin-top:50px;">
+      <tr>
+        <td style="width: 1px;"></td>
+        <td><b>Aceite</b></td>
+        <td><b>Opciones</b></td>
+        <td><b>Caracteristicas</b></td>
+      </tr>
+      <!-- ko foreach: aceites -->
+      <tr>
+        <td>
+          <span data-bind="text: id" class="label"></span>
+        </td>
+        <td>
+          <p><b>Nombre:&nbsp;&nbsp;</b><span data-bind="text: nombreAceite"></span></p>
+          <p><b>Familia:&nbsp;&nbsp;</b><a data-bind="attr: {href:'https://www.google.com/search?q=' + familia}, text: familia"></a></p>
+        </td>
+        <td>
+          <button data-bind="click: $parent.mostrar_aceite" class="btn" id="boton-cambio">Ficha</button>
+          <button data-bind="click: $parent.borrar" class="btn" >Borrar</button>
+        </td>
+        <td>
+          <span data-bind="visible: etiqueta1, text: etiqueta1" class="badge badge-pill "></span>
+          <span data-bind="visible: etiqueta2, text: etiqueta2" class="badge badge-pill "></span>
+          <span data-bind="visible: etiqueta3, text: etiqueta3" class="badge badge-pill "></span>
+          <span data-bind="visible: etiqueta4, text: etiqueta4" class="badge badge-pill "></span>
+          <span data-bind="visible: etiqueta5, text: etiqueta5" class="badge badge-pill "></span>
+          <span data-bind="visible: etiqueta6, text: etiqueta6" class="badge badge-pill "></span>
+          <span data-bind="visible: etiqueta7, text: etiqueta7" class="badge badge-pill "></span>
+        </td>
+      </tr>
+      <!-- /ko -->
+    </table>
+    <div class="row" >
+      <div class="col-12"><button id ="boton_aniadir" data-bind="click: anyadir" class="btn float-right" style="margin-bottom:50px;">Añadir usuario</button></div>
+    </div>
+  </div>
 
-                    self.anyadir = function () {
-                        $('#anyadir').modal('show');
-                    }
+  <!-- Modal de mostrar aceites-->
+  <div id="mostrar_aceite" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
 
-                    self.guardarNuevo = function (usuario) {
-                        self.miAjax(self.usuariosURI, 'POST', usuario).done(
-                            function(data) {
-                                self.usuarios.push({
-                                    id: ko.observable(data.usuario.id),
-                                    nombreUsuario: ko.observable(data.usuario.nombreUsuario),
-                                    email: ko.observable(data.usuario.email),
-                                    password: ko.observable(data.usuario.password)
-                                });
-                            }
-                        );
-                    }
+        <div class="modal-header">
+          <h5>Ficha del aceite</h5>
+          <!-- data-dismiss cierra todos los cuadros modales abiertos -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
-                    self.editar = function (usuario) {
-                        editarUsuarioViewModel.mostrarUsuario(usuario);
-                        $('#editar').modal('show');
-                    }
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="container">
+              <div class="row" id="imagen">
 
-                    self.guardarModificacion = function (usuarioOriginal, usuarioModificado) {
-                        self.miAjax(self.usuariosURI + usuarioModificado.id + '/', 'PUT', usuarioModificado).done(
-                            function (data) {
-                                data.usuario.id = ko.observable(data.usuario.id);
-                                data.usuario.nombreUsuario = ko.observable(data.usuario.nombreUsuario);
-                                data.usuario.email = ko.observable(data.usuario.email);
-                                data.usuario.password = ko.observable(data.usuario.password);
-                                self.usuarios.replace(usuarioOriginal,data.usuario);
-                            });
-                    }
+                  <img src="img/potion.jpg" id="imagen" alt="..." class="img-thumbnail">
 
-                    self.borrar = function (usuario) {
-                        alert("Borrar: " + usuario.nombreUsuario());
-                    }
-
-                    // Para el get que obtiene la colección de usuarios completa NO pasamos datos
-                    self.miAjax(self.usuariosURI, 'GET').done(function (data) {
-                        for (var i = 0; i < data.usuarios.length; i++) {
-                            self.usuarios.push({
-                                id: ko.observable(data.usuarios[i].id),
-                                nombreUsuario: ko.observable(data.usuarios[i].nombreUsuario),
-                                email: ko.observable(data.usuarios[i].email),
-                                password: ko.observable(data.usuarios[i].password)
-                            });
-                        }
-                    });
-                }
-
-                var usuariosViewModel = new UsuariosViewModel();
-
-                // Nuevo Modelo de Vista para anyadir usuarios
-                function AnyadirUsuarioViewModel() {
-                    var self = this;
-                    self.nombreUsuario = ko.observable();
-                    self.email = ko.observable();
-                    self.estado= ko.observable(true);
-
-                    self.anyadirUsuario = function() {
-                        $('#anyadir').modal('hide');
-
-                        usuariosViewModel.guardarNuevo({
-                            nombreUsuario: self.nombreUsuario(),
-                            email: self.email(),
-                            activo: self.estado()
-                        });
-                        self.nombreUsuario("");
-                        self.email("");
-                    }
-                }
-
-                // Nuevo Modelo de Vista para editar usuarios
-                function EditarUsuarioViewModel() {
-                    var self = this;
-                    self.id = ko.observable();
-                    self.nombreUsuario = ko.observable();
-                    self.email = ko.observable();
-                    self.estado= ko.observable(true);
-
-                    self.mostrarUsuario = function(usuario) {
-                        // Lo copia antes de modificarlo
-                        self.usuario = usuario;
-                        self.id(usuario.id())
-                        self.nombreUsuario(usuario.nombreUsuario());
-                        self.email(usuario.email());
-                        self.estado(usuario.activo());
-                    }
-
-                    self.guardarModificacion = function(){
-                        $('#editar'). modal('hide');
-                        usuariosViewModel.guardarModificacion(self.usuario, {
-                            id: self.id(),
-                            nombreUsuario: self.nombreUsuario(),
-                            email: self.email(),
-                            activo: self.estado()
-                        })
-                    }
-                }
-
-                var anyadirUsuarioViewModel = new AnyadirUsuarioViewModel();
-                ko.applyBindings(usuariosViewModel, $('#cuerpo')[0]);
-                ko.applyBindings(anyadirUsuarioViewModel, $('#anyadir')[0]);
-                var editarUsuarioViewModel = new EditarUsuarioViewModel();
-                ko.applyBindings(editarUsuarioViewModel, $('#editar')[0]);
-
-              });
+                </div>
+              </div>
 
 
-              $( ".nav_link_aceites" ).click(function() {
-                $('#prueba').show();
-                $('#cuerpo').hide();
-                $('#informacion').hide();
-                $("#boton_aniadir").hide();
-              });
-              $( ".nav_link_info" ).click(function() {
-                $('#informacion').show();
-                $('#prueba').hide();
-                $('#cuerpo').hide();
+          </form>
+        </div>
+        <div class="modal-footer">
 
-              });
-            });
-            </script>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            <script src="js/users.js"></script>
+  <!-- Modal de añadir aceites
+  <div id="anyadir_aceite" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>Añadir aceite</h5>
 
-            <script src="js/oils.js"></script>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label" for="inputNombreAceite">Nombre</label>
+            <div class="controls">
+              <input data-bind="value: nombreAceite" type="text" id="inputNombreAceite" placeholder="Ej. Aceite de rosas" style="width: 170px;">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputNombreLatinoAceite">Nombre Latino</label>
+            <div class="controls">
+              <input data-bind="value: nombreLatinoAceite" type="text" id="inputNombreLatinoAceite" placeholder="Ej. Aceitum rosatum" style="width: 170px;">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputDesc">Descripcion</label>
+            <div class="controls">
+              <input data-bind="value: descripcionAceite" type="text" id="inputDesc" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputFamilia">Familia</label>
+            <div class="controls">
+              <input data-bind="value: familiaAceite" type="text" id="inputFamilia" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputProcedencia">Procedencia</label>
+            <div class="controls">
+              <input data-bind="value: procedenciaAceite" type="text" id="inputProcedencia" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputExtraccion">Extracción</label>
+            <div class="controls">
+              <input data-bind="value: extraccionAceite" type="text" id="inputExtraccion" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputDescOlf">Descripción Olfativa</label>
+            <div class="controls">
+              <input data-bind="value: descOlfAceite" type="text" id="inputDescOlf" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputApariencia">Apariencia</label>
+            <div class="controls">
+              <input data-bind="value: aparienciaAceite" type="text" id="inputApariencia" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputNotPerf">Nota de Perfume</label>
+            <div class="controls">
+              <input data-bind="value: notaPerfAceite" type="text" id="inputNotPerf" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPerfume">Perfume</label>
+            <div class="controls">
+              <input data-bind="value: perfumeAceite" type="text" id="inputFamilia" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputSolubilidad">Solubilidad</label>
+            <div class="controls">
+              <input data-bind="value: solubilidadAceite" type="text" id="inputSolubilidad" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputUsos">Usos</label>
+            <div class="controls">
+              <input data-bind="value: usosAceite" type="text" id="inputUsos" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPropiedades">Propiedades</label>
+            <div class="controls">
+              <input data-bind="value: propiedadesAceite" type="text" id="inputPropiedades" placeholder="Ej. Pues es asi como rosado" style="width: 270px;">
+            </div>
+          </div>
+          <div class="control-group" style="margin-top:20px;">
+
+            <div class="controls">
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button data-bind="click: anyadirUsuario" type="button" class="btn">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+<section class="jumbotron text-center" id ="informacion" >
+  <div class="container">
+    <h1 class="jumbotron-heading">Práctica de sistemas interactivos sobre el desarrollo de un cliente web con Knockout.js </h1>
+    <p class="lead text-muted">Alfonso Barragán Carmona</p>
+    <p class="lead text-muted">Javier Monescillo Buitrón</p>
+    <p>
+      JavaScript  JQuery  Knockout.js  Bootstrap   HTML5   CSS3  Python
+    </p>
+  </div>
+</section>
+
+<footer class="text-muted">
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Subir arriba</a>
+    </p>
+
+  </div>
+</footer>
+
+<script src="js/actionCode.js"></script>
+<script src="js/users.js"></script>
+<script src="js/oils.js"></script>
 
 
-          </body>
 
-          </html>
+</body>
+
+</html>
